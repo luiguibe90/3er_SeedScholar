@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 module.exports=app=>{
 const product = require("../controllers/Obtener.js");
   app.get("/products",product.findAll);  

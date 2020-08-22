@@ -1,5 +1,5 @@
+/*jshint esversion: 6 */
 const sql = require('../util/database.js');
-
 
 
 const Product = function (product) {
