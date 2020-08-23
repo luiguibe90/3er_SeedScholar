@@ -32,7 +32,8 @@ app.get("/", (req, res) => {
   res.json({ message: "Rest taller WEB." });
 });
 
-require("../cursoNode/routes/products.js")(app);
+// require("../cursoNode/routes/products.js")(app);
+require("../Seed/routes/teacher.route.js")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
