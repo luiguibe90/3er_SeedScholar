@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 const Teacher = require('../models/teacher.model.js');
-const Teacher1 = require('../models/teacher.model.js');
+//const Teacher1 = require('../models/teacher.model.js');
 exports.findOne = (req, res) => {
     Teacher.docenteAsistencia(req.params.cod_docente, (err, data) => {
         if (err) {
@@ -16,7 +16,6 @@ exports.findOne = (req, res) => {
         } else {
             res.send(data);
         }
-
     });
 };
 exports.Periodo = (req, res) => {
@@ -149,7 +148,7 @@ exports.ingresarCalf = (req, res) => {
             message: "contenido no puede estar vacio!"
         });
     }
-    const calificacion = new Teacher1({
+    const calificacion = new Teacher({
         COD_PERIODO_LECTIVO: req.body.COD_PERIODO_LECTIVO,
         COD_ALUMNO: req.body.COD_ALUMNO,
         COD_NIVEL_EDUCATIVO: req.body.COD_NIVEL_EDUCATIVO,
@@ -161,7 +160,7 @@ exports.ingresarCalf = (req, res) => {
         NOTA3: req.body.NOTA3,
         NOTA4: req.body.NOTA4,
     });
-    Teacher1.ingresarCalf(calificacion, (err, data) => {
+    Teacher.ingresarCalf(calificacion, (err, data) => {
         if (err) {
             res.status(500).send({
                 message:

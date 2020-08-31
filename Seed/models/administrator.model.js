@@ -28,3 +28,6 @@ Persona.countTypePeople = (codTypePeople, result) => {
         }
     });
 };
+
+
+module.exports = Persona;

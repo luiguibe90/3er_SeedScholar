@@ -7,19 +7,29 @@ const Teacher = function (Teacher) {
     this.COD_NIVEL_EDUCATIVO= Teacher.COD_NIVEL_EDUCATIVO;
     this.FECHA= Teacher.FECHA;
     this.ESTADO= Teacher.ESTADO;
+
+    this.COD_ASIGNATURA= Teacher.$COD_ASIGNATURA;
+    this.COD_PARALELO= Teacher.$COD_PARALELO;
+    this.COD_DOCENTE= Teacher.$COD_DOCENTE;
+    this.NOTA1= Teacher.$NOTA1;
+    this.NOTA2= Teacher.$NOTA2;
+    this.NOTA3= Teacher.$NOTA3;
+    this.NOTA4= Teacher.$NOTA4;
+    this.NOTA5= Teacher.$NOTA5;
+    this.NOTA6= Teacher.$NOTA6;
 }
-const Teacher1 = function (Teacher1) {
-    this.COD_PERIODO_LECTIVO= Teacher1.COD_PERIODO_LECTIVO;
-    this.COD_ALUMNO= Teacher1.COD_ALUMNO;
-    this.COD_NIVEL_EDUCATIVO= Teacher1.COD_NIVEL_EDUCATIVO;
-    this.COD_ASIGNATURA= Teacher1.$COD_ASIGNATURA;
-    this.COD_PARALELO= Teacher1.$COD_PARALELO;
-    this.COD_DOCENTE= Teacher1.$COD_DOCENTE;
-    this.NOTA1= Teacher1.$NOTA1;
-    this.NOTA2= Teacher1.$NOTA2;
-    this.NOTA3= Teacher1.$NOTA3;
-    this.NOTA4= Teacher1.$NOTA4;
-}
+// const Teacher1 = function (Teacher1) {
+//     this.COD_PERIODO_LECTIVO= Teacher1.COD_PERIODO_LECTIVO;
+//     this.COD_ALUMNO= Teacher1.COD_ALUMNO;
+//     this.COD_NIVEL_EDUCATIVO= Teacher1.COD_NIVEL_EDUCATIVO;
+//     this.COD_ASIGNATURA= Teacher1.$COD_ASIGNATURA;
+//     this.COD_PARALELO= Teacher1.$COD_PARALELO;
+//     this.COD_DOCENTE= Teacher1.$COD_DOCENTE;
+//     this.NOTA1= Teacher1.$NOTA1;
+//     this.NOTA2= Teacher1.$NOTA2;
+//     this.NOTA3= Teacher1.$NOTA3;
+//     this.NOTA4= Teacher1.$NOTA4;
+// }
 
 Teacher.docenteAsistencia = (cod_docente, result) => {
     sql.query(`SELECT asignatura.NOMBRE, asignatura.COD_NIVEL_EDUCATIVO, asignatura.COD_ASIGNATURA,
@@ -158,7 +168,7 @@ Teacher.listarEstudiantes = (cod_nivel_educativo, cod_periodo_lectivo, result) =
         }
     });
 };
-Teacher1.ingresarCalf = (newCalf, result) => {
+Teacher.ingresarCalf = (newCalf, result) => {
     sql.query("INSERT INTO alumno_asignatura_periodo SET ?", newCalf, (err, res) => {
         if (err) {
             console.log("error Al Insertar calficacion:", err);
@@ -170,17 +180,17 @@ Teacher1.ingresarCalf = (newCalf, result) => {
         }
     });
 };
-
-// function ingresarNotas($cod_periodo_lectivo,$cod_alumno,$cod_nivel_educativo,$cod_asignatura,$cod_paralelo,$cod_docente,$nota1,$nota2,$nota3)
-//     {
-//         $stmt = $this->conex->prepare("INSERT INTO alumno_asignatura_periodo (COD_PERIODO_LECTIVO,COD_ALUMNO,COD_NIVEL_EDUCATIVO, 
-//         COD_ASIGNATURA,COD_PARALELO,COD_DOCENTE,NOTA1,NOTA2,NOTA3)
-//         VALUES (?,?,?,?,?,?,?,?,?)");
-//         $stmt->bind_param('sisssiddd',$cod_periodo_lectivo,$cod_alumno,$cod_nivel_educativo,$cod_asignatura,$cod_paralelo,$cod_docente,$nota1,$nota2,$nota3);
-//         $stmt->execute();
-//         $stmt->close();
-//     }
-
+Teacher.ingresarCalf2 = (newCalf2, result) => {
+    sql.query("UPDATE alumno_asignatura_periodo SET  NOTA4=?,NOTA5=?,NOTA6=? WHERE COD_ALUMNO=? AND COD_ASIGNATURA=?", newCalf2, (err, res) => {
+        if (err) {
+            console.log("error Al modificar calficacion:", err);
+            result(err, null);
+            return;
+        } else {
+            console.log("Notas Modificadas: ", { COD_PERIODO_LECTIVO: res.insertCOD_PERIODO_LECTIVO, ...newCalf2 });
+            result({ COD_PERIODO_LECTIVO: res.insertCOD_PERIODO_LECTIVO, ...newCalf2 });
+        }
+    });
+};
 
 module.exports = Teacher;
-module.exports = Teacher1;
