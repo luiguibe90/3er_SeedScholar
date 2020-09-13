@@ -35,6 +35,7 @@ app.get("/", (req, res) => {
 // require("../cursoNode/routes/products.js")(app);
 require("../Seed/routes/teacher.route.js")(app);
 require("../Seed/routes/administrator.route.js")(app);
+require("../Seed/routes/infraestructura.route.js")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
