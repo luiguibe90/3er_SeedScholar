@@ -1,0 +1,81 @@
+<app-main></app-main>
+<div class="layout-content">
+    <div class="p-grid">
+        <div class="p-col-12 p-md-6 p-lg-2">
+            <button type="button" pButton icon="pi pi-bars" label="Menu" (click)="menu.toggle($event)"></button>
+            <p-menu #menu [popup]="true" [model]="items"></p-menu>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-9">
+            <p-table [value]="notes" *ngIf="tablenotes">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-ai-center p-jc-between" *ngIf="notes1p">
+                        Notas de Primer Quimestre
+                    </div>
+                    <div class="p-d-flex p-ai-center p-jc-between" *ngIf="notes2p">
+                        Notas de Segundo Quimestre
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Materia</th>
+                        <th>Deberes</th>
+                        <th>Talleres</th>
+                        <th>Laboratorios</th>
+                        <th>Pruebas</th>
+                        <th>Examenes</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-note>
+                    <tr *ngIf="notes1p">
+                        <td>{{note.MATERIA}}</td>
+                        <td>{{note.NOTA1}}</td>
+                        <td>{{note.NOTA2}}</td>
+                        <td>{{note.NOTA3}}</td>
+                        <td>{{note.NOTA4}}</td>
+                        <td>{{note.NOTA5}}</td>
+                    </tr>
+                    <tr *ngIf="notes2p">
+                        <td>{{note.MATERIA}}</td>
+                        <td>{{note.NOTA6}}</td>
+                        <td>{{note.NOTA7}}</td>
+                        <td>{{note.NOTA8}}</td>
+                        <td>{{note.NOTA9}}</td>
+                        <td>{{note.NOTA10}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+            <div class="p-grid" *ngIf="tablehomework">
+                <div class="card">
+                    <h2>Materia:</h2>
+                    <p-dropdown [options]="subjects" [(ngModel)]="selectedSubject" placeholder="Selecciona la Asignatura..." optionLabel="MATERIA" [showClear]="true" (onChange)="onChange(selectedSubject)"></p-dropdown>
+                </div>
+            </div>
+            <div class="p-grid" *ngIf="tablehomework2">
+                <p-table [value]="homeworks" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} deberes" [rowsPerPageOptions]="[5,10,15]">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Materia</th>
+                            <th>Deberes</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-homework>
+                        <tr>
+                            <td>{{homework.MATERIA}}</td>
+                            <td>{{homework.DETALLE_TAREA}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+
+         
+
+
+
+
+        </div>
+
+    </div>
+</div>
+
+<app-footer></app-footer>

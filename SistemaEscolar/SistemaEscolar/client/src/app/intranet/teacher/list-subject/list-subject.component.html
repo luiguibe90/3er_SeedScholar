@@ -1,0 +1,61 @@
+<div class="p-grid">
+    <div class="p-col-4">
+        <div class="card">
+            <h2>Materia:</h2>
+            <p-dropdown [options]="subjects" [(ngModel)]="selectedSubject" placeholder="Selecciona la Asignatura..." optionLabel="MATERIA" [showClear]="true" (onChange)="onChange(selectedSubject)"></p-dropdown>
+        </div>
+    </div>
+    <div class="p-col-4" *ngIf="dropLevel">
+        <div class="card">
+            <h2>Nivel Educativo:</h2>
+            <p-dropdown [options]="levels" [(ngModel)]="selectedLevel" placeholder="Selecciona el nivel educativo..." optionLabel="NOMBRE" [showClear]="true" (onChange)="onChangeLevel(selectedLevel)"></p-dropdown>
+        </div>
+    </div>
+    <div class="p-col-4" *ngIf="dropClassroom">
+        <div class="card">
+            <h2>Aula:</h2>
+            <p-dropdown [options]="classrooms" [(ngModel)]="selectedClassroom" placeholder="Selecciona el aula..." optionLabel="NOMBRE" [showClear]="true" (onChange)="onChangeClassroom(selectedClassroom)"></p-dropdown>
+        </div>
+    </div>
+</div>
+
+<div class="p-grid" *ngIf="dropHomeworks">
+    <div class="p-col-6">
+        <p-panel header="Asignar Deber">
+            <div class="p-col-6">
+                <textarea [(ngModel)]="deberasignado" [rows]="20" [cols]="70" pInputTextarea autoResize="autoResize"></textarea>
+            </div>
+            <div class="p-col-6">
+                <p-button label="Aceptar" icon="pi pi-check" (click)="onAddHomework(deberasignado)"></p-button>
+            </div>
+        </p-panel>
+    </div>
+    <div class="p-col-6">
+        <p-panel header="Deberes Asignados">
+            <p-table [value]="homeworks" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} deberes" [rowsPerPageOptions]="[5,10,15]">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Deberes Asignados</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-homework let-editing="editing" let-ri="rowIndex">
+                    <tr [pEditableRow]="homework">
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="homework.DETALLE_TAREA">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{homework.DETALLE_TAREA}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td style="text-align:center">
+                            <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(homework)" class="p-button-rounded p-button-text"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </p-panel>
+    </div>
+</div>

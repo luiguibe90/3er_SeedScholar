@@ -1,0 +1,237 @@
+<app-main></app-main>
+<div class="layout-content">
+    <button type="button" pButton icon="pi pi-bars" label="Menu" (click)="menu.toggle($event)"></button>
+    <p-menu #menu [popup]="true" [model]="items"></p-menu>
+    <div class="p-grid">
+
+        <div class="p-col-12 p-md-6 p-lg-3">
+            <br>
+            <button pButton *ngIf="campusList" label="Agregar Sede" type="button" class="p-button-info" (click)="addCampusForm()"></button>
+            <button pButton *ngIf="agregarEdificio" label="Agregar Edificio" type="button" class="p-button-info" (click)="addBuildingForm()"></button>
+            <button pButton *ngIf="agregarAula" label="Agregar Aula" type="button" class="p-button-info" (click)="addClassroomForm()"></button>
+        </div>
+        <div class="p-col-12 p-md-4 p-lg-8" *ngIf="campusForm">
+            <label for="name">Nombre de la cede:</label><br>
+            <input type="text" pInputText [(ngModel)]="camp.NOMBRE" /><br>
+            <label for="direccion">Direccion:</label><br>
+            <input type="text" pInputText [(ngModel)]="camp.DIRECCION" /><br>
+            <label for="telefono">Telefono:</label><br>
+            <input type="text" pInputText [(ngModel)]="camp.TELEFONO" /><br>
+            <label for="codigopostal">Codigo Postal:</label><br>
+            <input type="text" pInputText [(ngModel)]="camp.CODIGO_POSTAL" /><br>
+            <button pButton type="button" label="Agregar" class="p-button-secondary" (click)="addCampus()"></button>
+        </div>
+        <div class="p-col-12 p-md-4 p-lg-8" *ngIf="buildingForm">
+            <p-dropdown [options]="campus" *ngIf="campusOption" [(ngModel)]="selectedCampus" placeholder="Selecciona la Sede..." optionLabel="NOMBRE" [showClear]="true" (onChange)="onChange(selectedCampus)"></p-dropdown><br><br>
+            <label for="nameB">Nombre del edificio:</label><br>
+            <input type="text" pInputText [(ngModel)]="build.NOMBRE" /><br>
+            <label for="cantidad">Cantidad Pisos:</label><br>
+            <input type="text" pInputText [(ngModel)]="build.CANTIDAD_PISOS" /><br>
+
+            <button pButton type="button" label="Agregar" class="p-button-secondary" (click)="addBuilding()"></button>
+        </div>
+        <div class="p-col-12 p-md-4 p-lg-8" *ngIf="clasroomForm">
+            <p-dropdown [options]="campus" [(ngModel)]="selectedCampus" placeholder="Selecciona la Sede..." optionLabel="NOMBRE" [showClear]="true" (onChange)="onChange(selectedCampus)"></p-dropdown><br><br>
+            <p-dropdown [options]="buildings" [(ngModel)]="selectedClassroom" placeholder="Selecciona el Edificio..." optionLabel="NOMBRE" [showClear]="true" (onChange)="onChange1(selectedClassroom)"></p-dropdown><br><br>
+            <label for="nameB">Nombre del Aula:</label><br>
+            <input type="text" pInputText [(ngModel)]="class1.NOMBRE"><br>
+            <label for="cantidad">Capacidad:</label><br>
+            <input type="text" pInputText [(ngModel)]="class1.CAPACIDAD"><br>
+            <label for="cantidad">TIPO:</label><br>
+            <input type="text" pInputText [(ngModel)]="class1.TIPO"><br>
+            <label for="cantidad">PISO:</label><br>
+            <input type="text" pInputText [(ngModel)]="class1.PISO"><br>
+
+            <button pButton type="button" label="Agregar" class="p-button-secondary" (click)="addClassroom()"></button>
+        </div>
+        <div class="p-col-12 p-md-4 p-lg-8">
+
+            <p-table [value]="campus" *ngIf="campusList">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Codigo de sede</th>
+                        <th>Nombre</th>
+                        <th>Direccion</th>
+                        <th>Telefono</th>
+                        <th>Codigo Postal</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-campus let-editing="editing" let-ri="rowIndex">
+                    <tr *ngIf="campusList" [pEditableRow]="campus">
+                        <td>{{campus.COD_SEDE}}</td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="campus.NOMBRE">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{campus.NOMBRE}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="campus.DIRECCION">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{campus.DIRECCION}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="campus.TELEFONO">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{campus.TELEFONO}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="campus.CODIGO_POSTAL">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{campus.CODIGO_POSTAL}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td style="text-align:center">
+                            <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(campus,campus.COD_SEDE)" class="p-button-rounded p-button-text"></button>
+                        </td>
+                        <td style="text-align:center">
+                            <button pButton pRipple type="button" icon="pi pi-times" (click)="onRowDelete(campus.COD_SEDE)" class="p-button-rounded p-button-warning"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            <p-dropdown [options]="campus" *ngIf="campusOption" [(ngModel)]="selectedCampus" placeholder="Selecciona la Sede..." optionLabel="NOMBRE" [showClear]="true" (onChange)="onChange(selectedCampus)"></p-dropdown>
+            <br *ngIf="campusOption">
+            <br *ngIf="campusOption">
+            <p-table [value]="buildings" *ngIf="buildingList">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Codigo Edificio</th>
+                        <th>Nombre</th>
+                        <th>Cantidad pisos</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-building let-editing="editing" let-ri="rowIndex">
+                    <tr>
+                        <td>{{building.COD_EDIFICIO}}</td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="building.NOMBRE">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{building.NOMBRE}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="building.CANTIDAD_PISOS">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{building.CANTIDAD_PISOS}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td style="text-align:center">
+                            <button *ngIf="!editing" pButton pRipple type="button" icon="pi pi-pencil" (click)="onRowEditBuilding(building,building.COD_EDIFICIO)" class="p-button-rounded p-button-text"></button>
+                        </td>
+                        <td style="text-align:center">
+                            <button pButton pRipple type="button" icon="pi pi-times" (click)="onRowDeleteBuilding(building.COD_EDIFICIO)" class="p-button-rounded p-button-warning"></button>
+                        </td>
+
+
+                    </tr>
+                </ng-template>
+
+            </p-table>
+            <br *ngIf="buildingOption">
+            <p-dropdown [options]="buildings" *ngIf="buildingOption" [(ngModel)]="selectedClassroom" placeholder="Selecciona el Edificio..." optionLabel="NOMBRE" [showClear]="true" (onChange)="onChange1(selectedClassroom)"></p-dropdown>
+            <br *ngIf="buildingOption">
+            <br *ngIf="buildingOption">
+            <p-table [value]="classrooms" *ngIf="classroomList">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Codigo Aula</th>
+                        <th>Nombre</th>
+                        <th>Capacidad</th>
+                        <th>Tipo</th>
+                        <th>Piso</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-classroom let-editing="editing" let-ri="rowIndex">
+                    <tr>
+                        <td>{{classroom.COD_AULA}}</td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="classroom.NOMBRE">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{classroom.NOMBRE}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="classroom.CAPACIDAD">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{classroom.CAPACIDAD}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="classroom.TIPO">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{classroom.TIPO}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" [(ngModel)]="classroom.PISO">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{classroom.PISO}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td style="text-align:center">
+                            <button *ngIf="!editing" pButton pRipple type="button" icon="pi pi-pencil" (click)="onRowEditClassroom(classroom,classroom.COD_AULA)" class="p-button-rounded p-button-text"></button>
+                        </td>
+                        <td style="text-align:center">
+                            <button pButton pRipple type="button" icon="pi pi-times" (click)="onRowDeleteClassroom(classroom.COD_AULA)" class="p-button-rounded p-button-warning"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+            <div class="card" *ngIf="asistencia">
+                <app-asistance></app-asistance>
+            </div>
+        </div>
+
+    </div>
+</div>
+<app-footer></app-footer>

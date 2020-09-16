@@ -1,0 +1,46 @@
+<div class="p-grid">
+    <div class="p-col-4">
+        <div class="card">
+            <h2>Fecha Actual:</h2>
+            <p>{{ fechaActual | date:'dd/MM/yyyy' }}</p>
+        </div>
+    </div>
+    <div class="p-col-4">
+        <div class="card">
+            <h2>Nivel Educativo:</h2>
+            <p-dropdown [options]="levels" [(ngModel)]="selectedLevel" placeholder="Selecciona el nivel educativo..." optionLabel="NOMBRE" [showClear]="true" (onChange)="onChangeLevel(selectedLevel)"></p-dropdown>
+        </div>
+    </div>
+    <div class="p-col-4" *ngIf="dropClassroom">
+        <div class="card">
+            <h2>Aula:</h2>
+            <p-dropdown [options]="classrooms" [(ngModel)]="selectedClassroom" placeholder="Selecciona el aula..." optionLabel="NOMBRE" [showClear]="true" (onChange)="onChangeClassroom(selectedClassroom)"></p-dropdown>
+        </div>
+    </div>
+    <div class="p-col-12">
+        <div class="card">
+            <p-table [value]="students">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Apellido</th>
+                        <th>Nombre</th>
+                        <th>Registrar Asistencia de {{ fechaActual | date:'dd/MM/yyyy' }}</th>
+                        <th>Aceptar</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-student>
+                    <tr>
+                        <td>{{student.APELLIDO}}</td>
+                        <td>{{student.NOMBRE}}</td>
+                        <td>
+                            <p-selectButton [options]="options" [(ngModel)]="student.ESTADO"></p-selectButton>
+                        </td>
+                        <td>
+                            <button pButton pRipple type="button" icon="pi pi-pencil" (click)="onRegister(student)" class="p-button-rounded p-button-text"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>

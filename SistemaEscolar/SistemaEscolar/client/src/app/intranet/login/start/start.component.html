@@ -1,0 +1,57 @@
+<head>
+    <title>Inicio de Sesión</title>
+    <meta charset="UTF-8">
+    <base href="/"> }
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+</head>
+
+<div class="login-body">
+    <div class="mobile-banner">
+        <img src="assets/layout/images/logo-mobile.svg" alt="prestige-layout"/>
+    </div>
+    <div class="login-panel">
+        <div class="logo">
+            <img src="assets/layout/images/logo.svg" alt="prestige-layout"/>
+        </div>
+    </div>
+  
+    <div class="login-card">
+        <div class="top-border"></div>
+        <div class="login-content">
+            <h1>Login</h1>
+            <p>Bienvenido, utilice el formulario para iniciar sesión..</p>
+            <div class="username-container">
+                <label>Nombre  de Usuario</label>
+                <div class="login-input">
+                    <input type="text" autocomplete="off" placeholder="Ingrese su nombre de usuario" pInputText [(ngModel)]="credential.NOMBRE_USUARIO">
+                </div>
+            </div>
+            <div class="password-container">
+                <label>Contraseña</label>
+                <div class="login-input">
+                    <input type="password" autocomplete="off" placeholder="ingrese su contraseña" pInputText [(ngModel)]="credential.CLAVE">
+                </div>
+            </div>
+            <div class="forgetpassword-container">
+                <a href="#" class="forget-password">Olvido su contraseña?</a>
+            </div>
+            <div>
+                <button pButton type="button" label="Iniciar Sesión" style="width: 100%"  (click)="getCredentials()" ></button>
+            </div>
+        </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

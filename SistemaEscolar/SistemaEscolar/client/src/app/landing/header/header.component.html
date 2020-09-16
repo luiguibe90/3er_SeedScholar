@@ -1,0 +1,27 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/bootstrap.min.css">
+    <script>
+        window.jQuery || document.write('<script src="../../../assets/js/jquery-1.11.2.min.js"><\/script>')
+    </script>
+    <script src="../../../assets/js/modernizr.js"></script>
+    <script src="../../../assets/js/main.js"></script>
+</head>
+<header class="full-reset header">
+    <div class="full-reset logo">
+        <img src="../../../assets/img/logo2.png" alt="Logo" class="hidden-xs hidden-sm">
+    </div>
+    <nav class="full-reset navigation">
+        <ul class="full-reset list-unstyled">
+            <li><a routerLink="/index" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
+            <li><a routerLink="/institution" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Institución</a></li>
+            <li><a routerLink="/academy" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Academico</a></li>
+            <li><a routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Mi Colegio</a></li>
+        </ul>
+    </nav>
+</header>

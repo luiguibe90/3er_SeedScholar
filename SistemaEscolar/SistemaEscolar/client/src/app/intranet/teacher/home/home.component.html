@@ -1,0 +1,18 @@
+<app-main></app-main>
+<div class="layout-content">
+    <button type="button" pButton icon="pi pi-bars" label="Menu" (click)="menu.toggle($event)"></button>
+    <p-menu #menu [popup]="true" [model]="items"></p-menu>
+    <div class="p-grid">
+        <div class="p-col-12 p-md-6 p-lg-3">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-9">
+            <app-list-notes *ngIf="tablestudents"></app-list-notes>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-9">
+            <app-list-subject *ngIf="tablessubject"></app-list-subject>
+        </div>
+
+    </div>
+</div>
+
+<app-footer></app-footer>

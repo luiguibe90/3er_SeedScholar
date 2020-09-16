@@ -1,0 +1,10 @@
+<div class="layout-wrapper" (click)="onLayoutClick()" [ngClass]="{'layout-menu-overlay': isOverlay(),
+                'layout-menu-overlay-active': overlayMenuActive,
+                'layout-menu-horizontal': isHorizontal(),
+                'layout-mobile-active': overlayMenuMobileActive,
+                'layout-fullwidth': wrapperMode}" [class]="layout">
+
+    <app-topbar></app-topbar>
+
+    <div class="layout-mask"></div>
+</div>

@@ -1,0 +1,177 @@
+<div class="p-grid">
+    <div class="p-col-6">
+        <div class="card">
+            <h2>Materia:</h2>
+            <p-dropdown [options]="subjects" [(ngModel)]="selectedSubject" placeholder="Selecciona la Asignatura..." optionLabel="MATERIA" [showClear]="true" (onChange)="onChange(selectedSubject)"></p-dropdown>
+        </div>
+    </div>
+</div>
+
+<div class="p-grid">
+    <div class="p-col-8" *ngIf="optionSubject">
+        <div class="card">
+            <p-panel header="Lista de Estudiantes">
+                <p-table [value]="students" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} estudiantes" [rowsPerPageOptions]="[5,10,15]">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Materia</th>
+                            <th>Apellidos</th>
+                            <th>Nombres</th>
+                            <th>Seleccionar Estudiante</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-student selectionMode="single">
+                        <tr>
+                            <td>{{student.MATERIA}}</td>
+                            <td>{{student.APELLIDO}}</td>
+                            <td>{{student.NOMBRE}}</td>
+                            <td>
+                                <p-radioButton [(ngModel)]="idStudent" value={{student.COD_ALUMNO}} (onClick)="selectStudent(idStudent)"></p-radioButton>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-panel>
+        </div>
+    </div>
+    <div class="p-col-4" *ngIf="idStudentButton">
+        <div class="card">
+            <p-panel header="Opciones">
+                <p-menu [model]="partialOptions"></p-menu>
+            </p-panel>
+        </div>
+    </div>
+</div>
+
+
+<div class="p-grid" *ngIf="tablenotes">
+    <div class="p-col">
+        <div class="card">
+            <p-panel header="Asignacion de notas">
+                <p-table [value]="notes">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Deberes</th>
+                            <th>Talleres</th>
+                            <th>Laboratorios</th>
+                            <th>Pruebas</th>
+                            <th>Examenes</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-note let-editing="editing" let-ri="rowIndex">
+                        <tr *ngIf="notes1p" [pEditableRow]="note">
+                            <td pEditableColumn>
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <input pInputText type="number" [(ngModel)]="note.NOTA1">
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{note.NOTA1}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                            <td pEditableColumn>
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <input pInputText type="number" [(ngModel)]="note.NOTA2">
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{note.NOTA2}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                            <td pEditableColumn>
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <input pInputText type="number" [(ngModel)]="note.NOTA3">
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{note.NOTA3}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                            <td pEditableColumn>
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <input pInputText type="number" [(ngModel)]="note.NOTA4">
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{note.NOTA4}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                            <td pEditableColumn>
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <input pInputText type="number" [(ngModel)]="note.NOTA5">
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{note.NOTA5}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                            <td style="text-align:center">
+                                <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(note)" class="p-button-rounded p-button-text"></button>
+                            </td>
+                        </tr>
+                        <tr *ngIf="notes2p" [pEditableRow]="note">
+                            <td pEditableColumn>
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <input pInputText type="number" [(ngModel)]="note.NOTA6">
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{note.NOTA6}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                            <td pEditableColumn>
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <input pInputText type="number" [(ngModel)]="note.NOTA7">
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{note.NOTA7}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                            <td pEditableColumn>
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <input pInputText type="number" [(ngModel)]="note.NOTA8">
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{note.NOTA8}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                            <td pEditableColumn>
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <input pInputText type="number" [(ngModel)]="note.NOTA9">
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{note.NOTA9}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                            <td pEditableColumn>
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <input pInputText type="number" [(ngModel)]="note.NOTA10">
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{note.NOTA10}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                            <td style="text-align:center">
+                                <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(note)" class="p-button-rounded p-button-text"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-panel>
+        </div>
+    </div>
+</div>
